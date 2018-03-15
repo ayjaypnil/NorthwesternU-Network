@@ -6,7 +6,7 @@ var session = require('express-session');
 var ejs = require('ejs');
 var mysql = require("mysql");
 
-var app = express();
+var app = module.exports = express(); 
 var PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs"); 
 
 app.use(express.static("public"));
+
+app.use(methodOverride("_method"));
 
 app.get("/", function(req, res) {
  res.render( __dirname + "/views/home.ejs");
@@ -43,6 +45,7 @@ app.get("/jobs", function(req, res) {
 app.get("/login", function(req, res) {
   res.render(__dirname + "/views/user/login.ejs");
 });
+
 app.get("/register", function(req, res) {
   res.render(__dirname + "/views/user/register.ejs");
 });
