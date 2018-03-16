@@ -5,18 +5,32 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var ejs = require('ejs');
 var mysql = require("mysql");
+var app = express();
 
-var app = module.exports = express(); 
+
+
 var PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+var connection = mysql.createConnection({
+  port: 3306,
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "nw_db"
+});
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set("view engine", "ejs"); 
 
 app.use(express.static("public"));
 
-app.use(methodOverride("_method"));
+
+
+
+
 
 app.get("/", function(req, res) {
  res.render( __dirname + "/views/home.ejs");
@@ -49,6 +63,25 @@ app.get("/login", function(req, res) {
 app.get("/register", function(req, res) {
   res.render(__dirname + "/views/user/register.ejs");
 });
+
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
+
+  app.post('/create', function(req, res){
+    var newMember = req.body;
+    // console.log(newMember);
+    var query = "INSERT INTO users (email, password_hash, first_name, last_name, campus, grad_date, site_link) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      connection.query(query, [req.body.email, req.body.password_hash, req.body.first_name, req.body.last_name, req.body.campus, req.body.grad_date, req.body.link], function(err, response){
+          if (err) throw err;
+      });
+    });
+});
+
+
 
 app.listen(PORT, function(err){
     if (err) throw err
