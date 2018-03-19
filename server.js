@@ -44,8 +44,8 @@ app.get("/profile", function(req, res) {
   res.render( __dirname + "/views/profile.ejs");
 });
 
-app.get("/events", function(req, res) {
-  res.render( __dirname + "/views/events.ejs");
+app.get("/newevent", function(req, res) {
+  res.render( __dirname + "/views/newevent.ejs");
 });
 
 app.get("/network", function(req, res) {
@@ -63,6 +63,8 @@ app.get("/login", function(req, res) {
 app.get("/register", function(req, res) {
   res.render(__dirname + "/views/user/register.ejs");
 });
+
+
 
 connection.connect(function(err) {
   if (err) {
@@ -88,6 +90,20 @@ connection.connect(function(err) {
           if (err) throw err;
       });
     });
+
+  app.get('/events', function(req, res){
+  
+	  var query = "SELECT * FROM events";
+
+	  connection.query(query, function(err, result) {
+		  // res.json(result);
+      res.render('events', {
+      	events: result
+      });
+      
+    });
+    
+  });
 
 });
 
