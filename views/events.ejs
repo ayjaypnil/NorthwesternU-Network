@@ -6,8 +6,26 @@
         <%- include('partials/navbar.ejs') -%>
 
                 <div class="container">
-                    <a href="/newevent"><button>Click here to add an event!</button></a>
-                    <%- JSON.stringify(events) %>
+                <h1>Events Page</h1>
+                    <!-- <%- JSON.stringify(events) %> -->
+                    
+
+                    <table>
+                        <% for(var i=0; i < events.length; i++) { %>
+                        <tr>
+                            <td><%= events[i].id %></td>
+                            <td><%= events[i].poster_email %></td>
+                            <td><%= events[i].events_name %></td>
+                            <td><%= events[i].date %></td>
+                            <td><%= events[i].details %></td>
+                        </tr>
+                        <% } %>
+                    </table>
+                    <br>
+                    <br>
+                    <a href="/newevent">
+                        <button>Click here to add an event!</button>
+                    </a>
                 </div>
 
         <!-- Sticky Footer -->

@@ -33,7 +33,7 @@ app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
- res.render( __dirname + "/views/home.ejs");
+ res.render( __dirname + "/views/main.ejs");
 });
 
 app.get("/home", function(req, res) {
@@ -106,8 +106,7 @@ connection.connect(function(err) {
     connection.query(query, function(err, result) {
 		  // res.json(result);
       res.render('network', {
-        users: result,
-        first_name: result[0].first_name
+        users: result
       });
     });
   });
