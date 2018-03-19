@@ -25,3 +25,17 @@ CREATE TABLE events
 	details varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
+
+CREATE TABLE jobs 
+(
+	job_id int NOT NULL AUTO_INCREMENT,
+	id int
+	job_title varchar(255) NOT NULL,
+	poster_name varchar(255) NOT NULL,
+    poster_email varchar(255) NOT NULL,
+	job_description varchar(255) NOT NULL,
+	date_posted varchar(255) NOT NULL,
+	link varchar(255) NOT NULL,
+	PRIMARY KEY (job_id),
+	FOREIGN KEY (id) REFERENCES users(id)
+);

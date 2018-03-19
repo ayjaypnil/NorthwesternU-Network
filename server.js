@@ -48,16 +48,15 @@ app.get("/newevent", function(req, res) {
   res.render( __dirname + "/views/newevent.ejs");
 });
 
-app.get("/jobs", function(req, res) {
-  res.render(__dirname + "/views/jobs.ejs");
-});
-
 app.get("/login", function(req, res) {
   res.render(__dirname + "/views/user/login.ejs");
 });
 
 app.get("/register", function(req, res) {
   res.render(__dirname + "/views/user/register.ejs");
+});
+app.get("/newjob", function(req, res) {
+  res.render(__dirname + "/views/newjob.ejs");
 });
 
 
@@ -111,6 +110,24 @@ connection.connect(function(err) {
     });
   });
 
+    app.post('/createjob', function(req, res){
+      var newJob = req.body;
+      // console.log(newMember);
+      var query = "INSERT INTO jobs (job_title, poster_name, poster_email, job_description, date_posted, link) VALUES (?, ?, ?, ?, ?, ?)";
+        connection.query(query, [req.body.job_title, req.body.poster_email, req.body.job_description, req.body.job_description, req.body.date_posted, req.body.link], function(err, response){
+            if (err) throw err;
+        });
+    });
+
+  app.get("/jobs", function(req, res) {
+    var query = "SELECT * FROM jobs";
+    connection.query(query, function(err, result) {
+		  // res.json(result);
+      res.render('jobs', {
+        jobs: result
+      });
+    });
+  });
 });
 
 

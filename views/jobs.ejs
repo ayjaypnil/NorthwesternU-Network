@@ -7,6 +7,38 @@
 
             <div class="container">
                 <h1>Jobs Page</h1>
+                <!-- <%- JSON.stringify(jobs) %> -->
+                   <table>
+                        <thead>
+                            <tr>
+                                
+                                <th>Job Title</th>
+                                <th>Poster Name</th>
+                                <th>Poster Email</th>
+                                <th>Job Description</th>
+                                <th>Date Posted</th>
+                                <th>Link To Job</th>
+                            </tr>
+                        </thead>
+                    <% for(var i=0; i < jobs.length; i++) { %>
+                    <tr>
+                        
+                        <td><%= jobs[i].job_title %></td>
+                        <td><%= jobs[i].poster_name %></td>
+                        <td><%= jobs[i].poster_email %></td>
+                        <td><%= jobs[i].job_description %></td>
+                        <td><%= jobs[i].date_posted %></td>
+                        <td><%= jobs[i].link %></td>
+                    </tr>
+                    <% } %>
+                </table>
+
+                    <a href="/newjob">
+                        <button>Click here to add a job!</button>
+                    </a>
+
+                    <br>
+                    <br>
             </div>
 
             <!-- Sticky Footer -->
