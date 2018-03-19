@@ -7,6 +7,19 @@
 
             <div class="container">
                 <h1>Network Page</h1>
+                <!-- <%- JSON.stringify(users) %> -->
+                <table>
+                    <% for(var i=0; i < users.length; i++) { %>
+                    <tr>
+                        <td><%= users[i].id %></td>
+                        <td><%= users[i].first_name %></td>
+                        <td><%= users[i].last_name %></td>
+                        <td><%= users[i].campus %></td>
+                        <td><%= users[i].grad_date %></td>
+                        <td><%= users[i].site_link %></td>
+                    </tr>
+                    <% } %>
+                </table>
             </div>
 
         <!-- Sticky Footer -->

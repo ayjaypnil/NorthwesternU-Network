@@ -48,10 +48,6 @@ app.get("/newevent", function(req, res) {
   res.render( __dirname + "/views/newevent.ejs");
 });
 
-app.get("/network", function(req, res) {
-  res.render( __dirname + "/views/network.ejs");
-});
-
 app.get("/jobs", function(req, res) {
   res.render(__dirname + "/views/jobs.ejs");
 });
@@ -100,9 +96,20 @@ connection.connect(function(err) {
       res.render('events', {
       	events: result
       });
-      
     });
-    
+
+  });
+
+  app.get("/network", function(req, res) {
+
+    var query = "SELECT * FROM users";
+    connection.query(query, function(err, result) {
+		  // res.json(result);
+      res.render('network', {
+        users: result,
+        first_name: result[0].first_name
+      });
+    });
   });
 
 });
