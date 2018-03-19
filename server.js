@@ -79,6 +79,16 @@ connection.connect(function(err) {
           if (err) throw err;
       });
     });
+
+  app.post('/createevent', function(req, res){
+    var newEvent = req.body;
+    // console.log(newMember);
+    var query = "INSERT INTO events (poster_email, event_name, location, posted_by, date, details) VALUES (?, ?, ?, ?, ?, ?)"
+      connection.query(query, [req.body.poster_email, req.body.event_name, req.body.location, req.body.posted_by, req.body.date, req.body.details], function(err, response){
+          if (err) throw err;
+      });
+    });
+
 });
 
 
