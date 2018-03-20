@@ -18,17 +18,13 @@ app.use(cookieParser());
 
 var PORT = process.env.PORT || 3000;
 
-if (app.settings.env == 'development'){
-  var connection = mysql.createConnection({
-    port: 3306,
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "nw_db"
-  });
-} else {
-  var connection = mysql.createConnection(process.env.JAWSDB_URL);
-};
+var connection = mysql.createConnection({
+  port: 3306,
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "nw_db"
+});
 
 connection.connect(function(err) {
   if (err) {
@@ -119,22 +115,23 @@ app.get('/signup', function (req, res) {
 });
 
 app.post('/create-user', function (req, res) {
-  
+  if (req.session.logged_in) {
+    res.redirect('/home');
+  }
 
-    var query = "INSERT INTO users (email, password_hash, first_name, last_name, campus, grad_date, site_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  var query = "INSERT INTO users (email, password_hash, first_name, last_name, campus, grad_date, site_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    connection.query(query, [req.body.email, req.body.password_hash, req.body.first_name, req.body.last_name, req.body.campus, req.body.grad_date, req.body.site_link], function (err, result) {
-      console.log(err, result);
-      if (err) {
-        res.send('there was an error');
-      }
+  connection.query(query, [req.body.email, req.body.password_hash, req.body.first_name, req.body.last_name, req.body.campus, req.body.grad_date, req.body.site_link], function (err, result) {
+    console.log(err, result);
+    if (err) {
+      res.send('there was an error');
+    }
 
-      req.session.logged_in = true;
-      req.session.username = req.body.email;
+    req.session.logged_in = true;
+    req.session.username = req.body.email;
 
-      res.redirect('/home');
-    });
-  
+    res.redirect('/home');
+  });
 });
 
 app.get("/signup", function (req, res) {
@@ -176,7 +173,7 @@ app.get("/newjob", function(req, res) {
 
   app.get("/network", function(req, res) {
 
-    var query = "SELECT * FROM users ORDER BY last_name;";
+    var query = "SELECT * FROM users ORDER BY last_name";
     connection.query(query, function(err, result) {
 		  // res.json(result);
       res.render('network', {
