@@ -119,23 +119,22 @@ app.get('/signup', function (req, res) {
 });
 
 app.post('/create-user', function (req, res) {
-  if (req.session.logged_in) {
-    res.redirect('/home');
-  }
+  
 
-  var query = "INSERT INTO users (email, password_hash, first_name, last_name, campus, grad_date, site_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    var query = "INSERT INTO users (email, password_hash, first_name, last_name, campus, grad_date, site_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-  connection.query(query, [req.body.email, req.body.password_hash, req.body.first_name, req.body.last_name, req.body.campus, req.body.grad_date, req.body.site_link], function (err, result) {
-    console.log(err, result);
-    if (err) {
-      res.send('there was an error');
-    }
+    connection.query(query, [req.body.email, req.body.password_hash, req.body.first_name, req.body.last_name, req.body.campus, req.body.grad_date, req.body.site_link], function (err, result) {
+      console.log(err, result);
+      if (err) {
+        res.send('there was an error');
+      }
 
-    req.session.logged_in = true;
-    req.session.username = req.body.email;
+      req.session.logged_in = true;
+      req.session.username = req.body.email;
 
-    res.redirect('/home');
-  });
+      res.redirect('/home');
+    });
+  
 });
 
 app.get("/signup", function (req, res) {
