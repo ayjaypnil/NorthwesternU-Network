@@ -1,5 +1,5 @@
-CREATE DATABASE nw_db;
-USE nw_db;
+-- CREATE DATABASE nw_db;
+-- USE nw_db;
 
 CREATE TABLE users
 (
@@ -11,6 +11,7 @@ CREATE TABLE users
 	campus varchar(255) NOT NULL,
 	grad_date varchar(255) NOT NULL,
 	site_link varchar(255) NOT NULL,
+	createdAt TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -23,19 +24,21 @@ CREATE TABLE events
 	posted_by varchar(255) NOT NULL,
 	date varchar(255) NOT NULL,
 	details varchar(255) NOT NULL,
+	createdAt TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE jobs 
 (
 	job_id int NOT NULL AUTO_INCREMENT,
-	id int
+	id int,
 	job_title varchar(255) NOT NULL,
 	poster_name varchar(255) NOT NULL,
     poster_email varchar(255) NOT NULL,
 	job_description varchar(255) NOT NULL,
 	date_posted varchar(255) NOT NULL,
 	link varchar(255) NOT NULL,
+	createdAt TIMESTAMP NOT NULL,
 	PRIMARY KEY (job_id),
 	FOREIGN KEY (id) REFERENCES users(id)
 );

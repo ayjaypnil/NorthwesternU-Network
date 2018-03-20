@@ -9,15 +9,31 @@ var app = express();
 
 
 
+
 var PORT = process.env.PORT || 3000;
 
-var connection = mysql.createConnection({
-  port: 3306,
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "nw_db"
-});
+
+if (app.settings.env == 'development'){
+  var connection = mysql.createConnection({
+    port: 3306,
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "nw_db"
+  });
+} else {
+  var connection = mysql.createConnection(process.env.JAWSDB_URL);
+};
+
+// else {
+//   connection = mysql.createConnection({
+//     port: 3306,
+//     host: "localhost",
+//     user: "root",
+//     password: "",
+//     database: "ozqjz8w94gje60u3"
+//   });
+// };
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
