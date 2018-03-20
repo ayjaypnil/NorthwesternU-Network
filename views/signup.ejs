@@ -1,0 +1,57 @@
+<%- include('partials/header') -%>
+    <!-- Header until body tag -->
+
+    <body>
+        <!-- Materialize Navbar -->
+        <%- include('partials/navbar') -%>
+
+            <div class="container">
+                <h3>Sign Up</h3>
+
+              <form class="col s6" action="/create-user" method="post">
+                <div class="input-field col s6">
+                <label for="email">Email:</label>
+                <input autocomplete="nope" type="text" name="email">
+                </div>
+                <div class="input-field col s6">
+                <label for="password">Password:</label>
+                <input autocomplete="new-password" type="password" name="password_hash">
+                </div>
+                <div class="input-field col s6">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name">
+                </div>
+                <div class="input-field col s6">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name">
+                </div>
+                <div class="row">
+                        <div class="input-field col s12">
+                <select name="campus">
+                        <option value="" disabled selected>Choose your Campus</option>
+                        <option value="Chicago">Chicago</option>
+                        <option value="Evanston">Evanston</option>
+                </div>
+                <div class="input-field col s12">
+                <div class="row">
+                        <div class="input-field col s12">
+                <label for="grad_date">Graduation Date:</label>
+                <input type="date" name="grad_date">
+                </div>
+                </div>
+                <div class="input-field col s12">
+                <label for="link">Personal Portfolio Link:</label>
+                <input type="text" name="site_link">
+                </div>
+                <input type="submit" value="sign up">
+              </form>
+            </div>
+
+            <!-- Sticky Footer -->
+            <%- include('partials/footer') -%>
+
+                <!-- DO NOT TOUCH!!! -->
+    </body>
+    <script src="/js/app.js"></script>
+
+    </html>
