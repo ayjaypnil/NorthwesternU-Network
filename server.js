@@ -177,7 +177,7 @@ app.get("/newjob", function(req, res) {
 
   app.get("/network", function(req, res) {
 
-    var query = "SELECT * FROM users";
+    var query = "SELECT * FROM users ORDER BY last_name;";
     connection.query(query, function(err, result) {
 		  // res.json(result);
       res.render('network', {
