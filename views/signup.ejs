@@ -29,20 +29,20 @@
 
               <form class="col s6" action="/create-user" method="post">
                 <div class="input-field col s6">
-                <label for="email">Email:</label>
-                <input autocomplete="nope" type="text" name="email">
+                    <label for="email">Email:</label>
+                    <input placeholder="address@somewhere.com" autocomplete="nope" type="text" id ="email" name="email"  class="validate" required>
                 </div>
                 <div class="input-field col s6">
-                <label for="password">Password:</label>
-                <input autocomplete="new-password" type="password" name="password_hash">
+                    <label for="password">Password:</label>
+                    <input autocomplete="new-password" type="password" name="password_hash"  class="validate" required>
                 </div>
                 <div class="input-field col s6">
-                <label for="first_name">First Name:</label>
-                <input type="text" name="first_name">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" class="validate" required>
                 </div>
                 <div class="input-field col s6">
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" class="validate" required>
                 </div>
                 <div class="row">
                         <div class="input-field col s12">
@@ -55,12 +55,12 @@
                 <div class="row">
                         <div class="input-field col s12">
                 <label for="grad_date">Graduation Date:</label>
-                <input type="date" name="grad_date">
+                <input type="date" name="grad_date"  class="validate" required>
                 </div>
                 </div>
                 <div class="input-field col s12">
                 <label for="link">Personal Portfolio Link:</label>
-                <input type="text" name="site_link">
+                <input placeholder="Link to your personal portfolio" type="text" name="site_link"  class="validate" required>
                 </div>
                 <input type="submit" value="sign up">
               </form>
@@ -71,6 +71,9 @@
 
                 <!-- DO NOT TOUCH!!! -->
     </body>
-    <script src="/js/app.js"></script>
+    <script>
+    
+   
+    </script>
 
     </html>
