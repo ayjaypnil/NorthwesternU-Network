@@ -257,8 +257,6 @@ app.use(express.static("public"));
     });
 
     app.get("/jobs", function(req, res) {
-     
-
 
         if (req.session.logged_in) {
            var query = "SELECT * FROM jobs";
