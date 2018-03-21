@@ -44,12 +44,19 @@ app.use(express.static("public"));
 
 
 
+
+
   app.get("/", function(req, res) {
     res.render(__dirname + "/views/main.ejs");
   });
 
   app.get("/home", function(req, res) {
-    res.render(__dirname + "/views/home.ejs");
+    
+      if (req.session.logged_in) {
+        res.render(__dirname + "/views/home.ejs");
+      } else {
+        res.render(__dirname + "/views/main.ejs");
+      }
   });
 
   // app.get("/profile", function(req, res) {
@@ -57,7 +64,11 @@ app.use(express.static("public"));
   // });
 
   app.get("/newevent", function(req, res) {
-    res.render(__dirname + "/views/newevent.ejs");
+     if (req.session.logged_in) {
+        res.render(__dirname + "/views/newevent.ejs");   
+    } else{
+        res.render(__dirname + "/views/main.ejs");
+     }
   });
 
   app.get("/login", function(req, res) {
@@ -171,7 +182,12 @@ app.use(express.static("public"));
     });
 
     app.get("/newjob", function(req, res) {
+
+      if (req.session.logged_in) {
       res.render(__dirname + "/views/newjob.ejs");
+      } else {
+        res.render(__dirname + "/views/main.ejs");
+      }
     });
 
     app.post("/createevent", function(req, res) {
@@ -195,20 +211,30 @@ app.use(express.static("public"));
     });
 
     app.get("/events", function(req, res) {
-      var query = "SELECT * FROM events";
+    
+      if (req.session.logged_in) {
+          var query = "SELECT * FROM events";
 
-      connection.query(query, function(err, result) {
-        // res.json(result);
-        res.render("events", { events: result });
-      });
+          connection.query(query, function(err, result) {
+            // res.json(result);
+            res.render("events", { events: result });
+          });
+      } else {
+        res.render(__dirname + "/views/main.ejs");
+      }
     });
 
     app.get("/network", function(req, res) {
-      var query = "SELECT * FROM users ORDER BY last_name";
-      connection.query(query, function(err, result) {
-        // res.json(result);
-        res.render("network", { users: result });
-      });
+
+        if (req.session.logged_in) {
+            var query = "SELECT * FROM users ORDER BY last_name";
+            connection.query(query, function(err, result) {
+              // res.json(result);
+              res.render("network", { users: result });
+            });
+        } else {
+          res.render(__dirname + "/views/main.ejs");
+        }
     });
 
     app.post("/createjob", function(req, res) {
@@ -231,11 +257,18 @@ app.use(express.static("public"));
     });
 
     app.get("/jobs", function(req, res) {
-      var query = "SELECT * FROM jobs";
-      connection.query(query, function(err, result) {
-        // res.json(result);
-        res.render("jobs", { jobs: result });
-      });
+     
+
+
+        if (req.session.logged_in) {
+           var query = "SELECT * FROM jobs";
+           connection.query(query, function(err, result) {
+             // res.json(result);
+             res.render("jobs", { jobs: result });
+            });
+        } else {
+          res.render(__dirname + "/views/main.ejs");
+        }
     });
 });
 
